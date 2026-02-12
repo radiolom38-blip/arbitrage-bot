@@ -1,0 +1,4 @@
+pybit==5.7.1  # Or latest version
+networkx==3.1
+asyncio
+websockets
