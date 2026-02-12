@@ -1,3 +1,0 @@
-pybit==5.8.0
-networkx>=3.0
-asyncio
