@@ -319,14 +319,14 @@ class MarketDataModule:
     async def connect(self):
         """Connect to Bybit DEMO WebSocket"""
         try:
-            # Use DEMO WebSocket endpoint
+            # Use DEMO WebSocket endpoint - pybit doesn't support demo parameter
+            # Just use testnet=False and it will use default endpoints
             self.ws = WebSocket(
-                testnet=False,  # Not testnet!
-                demo=True,      # DEMO mode
+                testnet=False,
                 channel_type="spot"
             )
             
-            logging.info(f"✅ WebSocket connected to DEMO: {Config.WS_ENDPOINT}")
+            logging.info(f"✅ WebSocket connected: {Config.WS_ENDPOINT}")
         except Exception as e:
             logging.error(f"WebSocket connection error: {e}")
             raise
@@ -796,10 +796,10 @@ class ArbitrageBot:
     def __init__(self, api_key: str, api_secret: str):
         # Initialize HTTP client for DEMO
         self.http = HTTP(
-            testnet=False,  # Not testnet!
-            demo=True,      # DEMO mode
+            testnet=False,
             api_key=api_key,
-            api_secret=api_secret
+            api_secret=api_secret,
+            base_url=Config.REST_ENDPOINT
         )
         
         logging.info(f"✅ HTTP client initialized for DEMO: {Config.REST_ENDPOINT}")
